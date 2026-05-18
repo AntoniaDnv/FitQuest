@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import Button from "./Button";
 import HeroPreview from "./HeroPreview";
+import { Link } from "react-router-dom";
 
 function Hero() {
   return (
@@ -31,8 +32,13 @@ function Hero() {
         </p>
 
         <div className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <Button>Get Started</Button>
-          <Button variant="secondary">View Demo →</Button>
+         <Link to="/register">
+  <Button>Get Started</Button>
+</Link>
+
+<Link to="/dashboard">
+  <Button variant="secondary">View Demo →</Button>
+</Link>
         </div>
       </motion.div>
 

@@ -19,7 +19,9 @@ function CTASection() {
           </p>
 
           <div className="mt-8 flex justify-center">
-            <Button>Join FitQuest</Button>
+           
+                <Button>Join FitQuest</Button>
+          
           </div>
         </div>
       </div>
