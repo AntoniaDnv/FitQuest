@@ -1,12 +1,14 @@
 function Button({ children, variant = "primary", className = "", ...props }) {
   const baseStyles =
-    "rounded-xl px-6 py-3 font-semibold transition duration-200";
+    "inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold transition duration-300";
 
   const variants = {
     primary:
-      "bg-gradient-to-r from-purple-600 to-cyan-500 text-white shadow-lg shadow-purple-900/30 hover:opacity-90",
+      "bg-gradient-to-r from-violet-500 to-indigo-500 text-white shadow-lg shadow-violet-900/40 hover:-translate-y-0.5 hover:shadow-violet-700/40",
     secondary:
-      "border border-slate-700 bg-slate-900/60 text-white hover:border-cyan-400 hover:text-cyan-300",
+      "border border-white/10 bg-white/[0.04] text-white backdrop-blur-xl hover:-translate-y-0.5 hover:border-violet-400/60 hover:bg-white/[0.08]",
+    ghost:
+      "text-slate-300 hover:text-white",
   };
 
   return (
