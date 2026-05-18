@@ -1,8 +1,11 @@
+import App from "../App";
 import AnimatedBackground from "../components/AnimatedBackground";
+import AppLayout from "../components/AppLayout";
 import Button from "../components/Button";
 
 function Dashboard() {
   return (
+    <AppLayout>
     <div className="relative min-h-screen overflow-hidden bg-slate-950 text-white">
       <AnimatedBackground />
 
@@ -53,6 +56,7 @@ function Dashboard() {
         </section>
       </main>
     </div>
+    </ AppLayout>
   );
 }
 
