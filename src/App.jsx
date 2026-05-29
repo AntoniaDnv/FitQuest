@@ -10,7 +10,7 @@ import Challenges from "./pages/Challenges";
 import ChallengeDetails from "./pages/ChallengeDetails";
 import Profile from "./pages/Profile";
 
-function App() {
+export default function App() {
   return (
     <BrowserRouter>
       <Routes>
