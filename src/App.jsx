@@ -10,7 +10,17 @@ import Challenges from "./pages/Challenges";
 import ChallengeDetails from "./pages/ChallengeDetails";
 import Profile from "./pages/Profile";
 
-export default function App() {
+import AdminRoute from "./routes/AdminRoute";
+import Unauthorized from "./pages/Unauthorized";
+import NotFound from "./pages/NotFound";
+
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminUsers from "./pages/admin/AdminUsers";
+import AdminChallenges from "./pages/admin/AdminChallenges";
+import AdminLogs from "./pages/admin/AdminLogs";
+import AdminAIOutputs from "./pages/admin/AdminAIOutputs";
+
+function App() {
   return (
     <BrowserRouter>
       <Routes>
@@ -23,7 +33,57 @@ export default function App() {
         <Route path="/challenges" element={<Challenges />} />
         <Route path="/challenges/:id" element={<ChallengeDetails />} />
         <Route path="/profile" element={<Profile />} />
+
+        <Route
+          path="/admin"
+          element={
+            <AdminRoute>
+              <AdminDashboard />
+            </AdminRoute>
+          }
+        />
+
+        <Route
+          path="/admin/users"
+          element={
+            <AdminRoute>
+              <AdminUsers />
+            </AdminRoute>
+          }
+        />
+
+        <Route
+          path="/admin/challenges"
+          element={
+            <AdminRoute>
+              <AdminChallenges />
+            </AdminRoute>
+          }
+        />
+
+        <Route
+          path="/admin/logs"
+          element={
+            <AdminRoute>
+              <AdminLogs />
+            </AdminRoute>
+          }
+        />
+
+        <Route
+          path="/admin/ai-outputs"
+          element={
+            <AdminRoute>
+              <AdminAIOutputs />
+            </AdminRoute>
+          }
+        />
+
+        <Route path="/unauthorized" element={<Unauthorized />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
 }
+
+export default App;
