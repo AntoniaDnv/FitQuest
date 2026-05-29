@@ -1,7 +1,21 @@
 import AppLayout from "../components/AppLayout";
 import Button from "../components/Button";
-
+import { use, useEffect, useState } from "react";
 function Profile() {
+  const [user, setUser] = useState({
+  username: "User",
+  email: "user@example.com",
+  fitnessLevel: "beginner",
+  goalType: "general_fitness",
+});
+
+useEffect(() => {
+  const savedUser = localStorage.getItem("fitquestUser");
+
+  if (savedUser) {
+    setUser(JSON.parse(savedUser));
+  }
+}, []);
   return (
     <AppLayout>
       <div className="mb-10">
@@ -9,7 +23,7 @@ function Profile() {
           Profile
         </p>
         <h1 className="mt-3 text-4xl font-semibold tracking-tight">
-          Antonia’s profile
+          {user.username}'s profile
         </h1>
         <p className="mt-3 text-slate-400">
           Manage your personal fitness information.
@@ -19,11 +33,11 @@ function Profile() {
       <section className="grid gap-5 lg:grid-cols-[0.7fr_1fr]">
         <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 text-center backdrop-blur-xl">
           <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-violet-500 to-cyan-400 text-3xl font-bold">
-            A
+           {}{user.username.charAt(0).toUpperCase()}
           </div>
 
-          <h2 className="mt-5 text-2xl font-semibold">Antonia</h2>
-          <p className="mt-2 text-slate-400">antonia@example.com</p>
+          <h2 className="mt-5 text-2xl font-semibold">{user.username}</h2>
+          <p className="mt-2 text-slate-400">{user.email}</p>
 
           <div className="mt-6 grid grid-cols-3 gap-3">
             <div className="rounded-2xl bg-slate-950/60 p-4">
@@ -50,7 +64,7 @@ function Profile() {
                 Username
               </label>
               <input
-                defaultValue="Antonia"
+                defaultValue={user.username}
                 className="w-full rounded-xl border border-white/10 bg-slate-950/70 px-4 py-3 outline-none focus:border-violet-400"
               />
             </div>
@@ -60,7 +74,7 @@ function Profile() {
                 Email
               </label>
               <input
-                defaultValue="antonia@example.com"
+                defaultValue={user.email}
                 className="w-full rounded-xl border border-white/10 bg-slate-950/70 px-4 py-3 outline-none focus:border-violet-400"
               />
             </div>

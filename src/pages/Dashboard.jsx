@@ -1,6 +1,7 @@
 import { useState } from "react";
 import AppLayout from "../components/AppLayout";
 import Button from "../components/Button";
+import { useEffect, useState } from "react";
 
 function Dashboard() {
   const [aiForm, setAiForm] = useState({
@@ -10,6 +11,20 @@ function Dashboard() {
     duration: "45",
     limitations: "",
   });
+  const [user, setUser] = useState({
+  username: "User",
+  email: "user@example.com",
+  fitnessLevel: "beginner",
+  goalType: "general_fitness",
+});
+
+useEffect(() => {
+  const savedUser = localStorage.getItem("fitquestUser");
+
+  if (savedUser) {
+    setUser(JSON.parse(savedUser));
+  }
+}, []);
 
   const [aiPlan, setAiPlan] = useState(null);
   const [isGenerating, setIsGenerating] = useState(false);
@@ -84,7 +99,7 @@ function Dashboard() {
             Dashboard
           </p>
           <h1 className="mt-3 text-4xl font-semibold tracking-tight md:text-5xl">
-            Welcome back, Antonia
+            Welcome back, {user.username}
           </h1>
           <p className="mt-3 text-slate-400">
             Here is your fitness progress and AI workout planning area.
