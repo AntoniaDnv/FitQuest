@@ -1,6 +1,7 @@
 import { useState } from "react";
 import AppLayout from "../components/AppLayout";
 import Button from "../components/Button";
+import EmptyState from "../components/EmptyState";
 
 function Goals() {
   const [goals, setGoals] = useState([
@@ -165,12 +166,10 @@ function Goals() {
 
         <div className="space-y-5">
           {goals.length === 0 ? (
-            <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-10 text-center backdrop-blur-xl">
-              <p className="text-2xl font-semibold text-white">No goals yet</p>
-              <p className="mt-3 text-slate-400">
-                Create your first goal to start tracking progress.
-              </p>
-            </div>
+           <EmptyState
+  title="No goals yet"
+  description="Create your first goal to start tracking progress."
+/>
           ) : (
             goals.map((goal) => {
               const progress =

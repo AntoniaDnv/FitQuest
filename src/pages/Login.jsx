@@ -1,8 +1,54 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/Button";
+import ErrorMessage from "../components/ErrorMessage";
 import AnimatedBackground from "../components/AnimatedBackground";
 
 function Login() {
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [error, setError] = useState("");
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+
+    setFormData((previousData) => ({
+      ...previousData,
+      [name]: value,
+    }));
+
+    setError("");
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    if (!formData.email || !formData.password) {
+      setError("Please enter both email and password.");
+      return;
+    }
+
+    if (!formData.email.includes("@")) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+    const demoUser = {
+  username: formData.email.split("@")[0],
+  email: formData.email,
+  fitnessLevel: "beginner",
+  goalType: "general_fitness",
+};
+
+localStorage.setItem("fitquestUser", JSON.stringify(demoUser));
+
+    navigate("/dashboard");
+  }
+
   return (
     <div className="relative min-h-screen overflow-hidden bg-slate-950 text-white">
       <AnimatedBackground />
@@ -30,12 +76,19 @@ function Login() {
             </p>
           </div>
 
-          <form className="space-y-5">
+         <div className="mb-5">
+  <ErrorMessage message={error} />
+</div>
+
+          <form onSubmit={handleSubmit} className="space-y-5">
             <div>
               <label className="mb-2 block text-sm font-medium text-slate-300">
                 Email
               </label>
               <input
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
                 type="email"
                 placeholder="antonia@example.com"
                 className="w-full rounded-xl border border-white/10 bg-slate-950/70 px-4 py-3 text-white outline-none transition placeholder:text-slate-600 focus:border-cyan-400"
@@ -47,6 +100,9 @@ function Login() {
                 Password
               </label>
               <input
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
                 type="password"
                 placeholder="••••••••"
                 className="w-full rounded-xl border border-white/10 bg-slate-950/70 px-4 py-3 text-white outline-none transition placeholder:text-slate-600 focus:border-cyan-400"
@@ -62,6 +118,10 @@ function Login() {
               Create one
             </Link>
           </p>
+
+          <div className="mt-6 rounded-2xl border border-white/10 bg-slate-950/60 p-4 text-sm text-slate-400">
+            Demo: enter any valid email and any password.
+          </div>
         </div>
       </main>
     </div>

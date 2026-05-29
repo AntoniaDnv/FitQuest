@@ -1,8 +1,61 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import AnimatedBackground from "../components/AnimatedBackground";
-
+import ErrorMessage from "../components/ErrorMessage";
 function Register() {
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+    fitnessLevel: "beginner",
+    goalType: "general_fitness",
+  });
+
+  const [error, setError] = useState("");
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+
+    setFormData((previousData) => ({
+      ...previousData,
+      [name]: value,
+    }));
+
+    setError("");
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    if (!formData.username || !formData.email || !formData.password) {
+      setError("Please fill in username, email, and password.");
+      return;
+    }
+
+    if (!formData.email.includes("@")) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+
+    if (formData.password.length < 6) {
+      setError("Password should be at least 6 characters.");
+      return;
+    }
+    const newUser = {
+  username: formData.username,
+  email: formData.email,
+  fitnessLevel: formData.fitnessLevel,
+  goalType: formData.goalType,
+};
+
+localStorage.setItem("fitquestUser", JSON.stringify(newUser));
+
+    navigate("/dashboard");
+  }
+
   return (
     <div className="relative min-h-screen overflow-hidden bg-slate-950 text-white">
       <AnimatedBackground />
@@ -31,12 +84,19 @@ function Register() {
             </p>
           </div>
 
-          <form className="grid gap-5 md:grid-cols-2">
+         <div className="mb-5">
+  <ErrorMessage message={error} />
+</div>
+
+          <form onSubmit={handleSubmit} className="grid gap-5 md:grid-cols-2">
             <div>
               <label className="mb-2 block text-sm font-medium text-slate-300">
                 Username
               </label>
               <input
+                name="username"
+                value={formData.username}
+                onChange={handleChange}
                 type="text"
                 placeholder="Antonia"
                 className="w-full rounded-xl border border-white/10 bg-slate-950/70 px-4 py-3 text-white outline-none transition placeholder:text-slate-600 focus:border-violet-400"
@@ -48,6 +108,9 @@ function Register() {
                 Email
               </label>
               <input
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
                 type="email"
                 placeholder="antonia@example.com"
                 className="w-full rounded-xl border border-white/10 bg-slate-950/70 px-4 py-3 text-white outline-none transition placeholder:text-slate-600 focus:border-violet-400"
@@ -59,6 +122,9 @@ function Register() {
                 Password
               </label>
               <input
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
                 type="password"
                 placeholder="Create a password"
                 className="w-full rounded-xl border border-white/10 bg-slate-950/70 px-4 py-3 text-white outline-none transition placeholder:text-slate-600 focus:border-violet-400"
@@ -69,10 +135,15 @@ function Register() {
               <label className="mb-2 block text-sm font-medium text-slate-300">
                 Fitness level
               </label>
-              <select className="w-full rounded-xl border border-white/10 bg-slate-950/70 px-4 py-3 text-white outline-none transition focus:border-violet-400">
-                <option>beginner</option>
-                <option>intermediate</option>
-                <option>advanced</option>
+              <select
+                name="fitnessLevel"
+                value={formData.fitnessLevel}
+                onChange={handleChange}
+                className="w-full rounded-xl border border-white/10 bg-slate-950/70 px-4 py-3 text-white outline-none transition focus:border-violet-400"
+              >
+                <option value="beginner">beginner</option>
+                <option value="intermediate">intermediate</option>
+                <option value="advanced">advanced</option>
               </select>
             </div>
 
@@ -80,11 +151,16 @@ function Register() {
               <label className="mb-2 block text-sm font-medium text-slate-300">
                 Main goal
               </label>
-              <select className="w-full rounded-xl border border-white/10 bg-slate-950/70 px-4 py-3 text-white outline-none transition focus:border-violet-400">
-                <option>general_fitness</option>
-                <option>weight_loss</option>
-                <option>muscle_gain</option>
-                <option>endurance</option>
+              <select
+                name="goalType"
+                value={formData.goalType}
+                onChange={handleChange}
+                className="w-full rounded-xl border border-white/10 bg-slate-950/70 px-4 py-3 text-white outline-none transition focus:border-violet-400"
+              >
+                <option value="general_fitness">general_fitness</option>
+                <option value="weight_loss">weight_loss</option>
+                <option value="muscle_gain">muscle_gain</option>
+                <option value="endurance">endurance</option>
               </select>
             </div>
 
