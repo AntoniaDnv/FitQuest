@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import AnimatedBackground from "../components/AnimatedBackground";
-
+import ErrorMessage from "../components/ErrorMessage";
 function Register() {
   const navigate = useNavigate();
 
@@ -84,11 +84,9 @@ localStorage.setItem("fitquestUser", JSON.stringify(newUser));
             </p>
           </div>
 
-          {error && (
-            <div className="mb-5 rounded-2xl border border-red-400/20 bg-red-400/10 p-4 text-sm text-red-200">
-              {error}
-            </div>
-          )}
+         <div className="mb-5">
+  <ErrorMessage message={error} />
+</div>
 
           <form onSubmit={handleSubmit} className="grid gap-5 md:grid-cols-2">
             <div>

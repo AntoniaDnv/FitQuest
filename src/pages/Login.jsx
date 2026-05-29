@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/Button";
+import ErrorMessage from "../components/ErrorMessage";
 import AnimatedBackground from "../components/AnimatedBackground";
 
 function Login() {
@@ -75,11 +76,9 @@ localStorage.setItem("fitquestUser", JSON.stringify(demoUser));
             </p>
           </div>
 
-          {error && (
-            <div className="mb-5 rounded-2xl border border-red-400/20 bg-red-400/10 p-4 text-sm text-red-200">
-              {error}
-            </div>
-          )}
+         <div className="mb-5">
+  <ErrorMessage message={error} />
+</div>
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>

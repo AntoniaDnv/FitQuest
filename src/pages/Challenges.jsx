@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import AppLayout from "../components/AppLayout";
 import Button from "../components/Button";
-
+import EmptyState from "../components/EmptyState";
 function Challenges() {
   const [challenges, setChallenges] = useState([
     {
@@ -222,14 +222,10 @@ function Challenges() {
 
         <div className="space-y-5">
           {challenges.length === 0 ? (
-            <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-10 text-center backdrop-blur-xl">
-              <p className="text-2xl font-semibold text-white">
-                No challenges yet
-              </p>
-              <p className="mt-3 text-slate-400">
-                Create the first challenge and start competing.
-              </p>
-            </div>
+           <EmptyState
+  title="No challenges yet"
+  description="Create the first challenge and start competing."
+/>
           ) : (
             challenges.map((challenge) => (
               <div

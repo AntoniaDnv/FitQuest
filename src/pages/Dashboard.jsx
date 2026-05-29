@@ -2,6 +2,7 @@
 import AppLayout from "../components/AppLayout";
 import Button from "../components/Button";
 import { useEffect, useState } from "react";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 function Dashboard() {
   const [aiForm, setAiForm] = useState({
