@@ -90,4 +90,4 @@ function ChallengeDetails() {
   );
 }
 
-export default ChallengeDetails;    
+export default ChallengeDetails;

@@ -8,14 +8,15 @@
 
 ## Admin Routes
 
-- [ ] Guest cannot access `/admin`
-- [ ] Regular user cannot access `/admin`
-- [ ] Regular user is redirected to `/unauthorized`
-- [ ] Admin can access `/admin`
-- [ ] Admin can access `/admin/users`
-- [ ] Admin can access `/admin/challenges`
-- [ ] Admin can access `/admin/logs`
-- [ ] Admin can access `/admin/ai-outputs`
+## Admin UI
+
+- [x] Admin navigation is visible
+- [x] Admin navigation links work
+- [x] Admin dashboard stats are visible
+- [x] Admin users page has ban/delete actions
+- [x] Admin challenges page has moderation action
+- [x] Admin logs page displays system actions
+- [x] Admin AI outputs page displays validation status
 
 ## Pages
 

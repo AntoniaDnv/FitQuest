@@ -66,7 +66,7 @@ function Goals() {
 
   function deleteGoal(goalId) {
     setGoals((previousGoals) =>
-      previousGoals.filter((goal) => goal.id !== goalId)
+      previousGoals.filter((goal) => goal.id !== goalId),
     );
   }
 
@@ -175,7 +175,10 @@ function Goals() {
             goals.map((goal) => {
               const progress =
                 goal.target > 0
-                  ? Math.min(Math.round((goal.current / goal.target) * 100), 100)
+                  ? Math.min(
+                      Math.round((goal.current / goal.target) * 100),
+                      100,
+                    )
                   : 0;
 
               return (
