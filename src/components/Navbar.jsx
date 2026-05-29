@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Button from "./Button";
 
 function Navbar() {
@@ -30,7 +31,9 @@ function Navbar() {
         </nav>
 
         <div className="hidden md:block">
-          <Button>Get Started</Button>
+          <Link to="/register">
+  <Button>Get Started</Button>
+</Link>
         </div>
       </div>
     </header>
