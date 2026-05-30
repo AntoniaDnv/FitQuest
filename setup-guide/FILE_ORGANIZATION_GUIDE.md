@@ -56,7 +56,7 @@ fitquest/
 fitquest/
 └── server/
     └── services/
-        └── aiService.js  ← PLACE FILE HERE
+        └── aiService.js  
 ```
 
 **File:** `server_services_aiService.js` (from outputs)  
