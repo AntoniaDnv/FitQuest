@@ -37,16 +37,28 @@ function Login() {
       setError("Please enter a valid email address.");
       return;
     }
+
+    const isAdmin =
+      formData.email.toLowerCase() === "admin@fitquest.com" ||
+      formData.email.toLowerCase() === "mireya@test.com";
+
     const demoUser = {
-  username: formData.email.split("@")[0],
-  email: formData.email,
-  fitnessLevel: "beginner",
-  goalType: "general_fitness",
-};
+      username: formData.email.split("@")[0],
+      email: formData.email,
+      role: isAdmin ? "admin" : "user",
+      fitnessLevel: "beginner",
+      goalType: "general_fitness",
+    };
 
-localStorage.setItem("fitquestUser", JSON.stringify(demoUser));
+    localStorage.setItem("fitquestUser", JSON.stringify(demoUser));
+    localStorage.setItem("token", "demo-token");
+    localStorage.setItem("role", demoUser.role);
 
-    navigate("/dashboard");
+    if (demoUser.role === "admin") {
+      navigate("/admin");
+    } else {
+      navigate("/dashboard");
+    }
   }
 
   return (
@@ -76,9 +88,9 @@ localStorage.setItem("fitquestUser", JSON.stringify(demoUser));
             </p>
           </div>
 
-         <div className="mb-5">
-  <ErrorMessage message={error} />
-</div>
+          <div className="mb-5">
+            <ErrorMessage message={error} />
+          </div>
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
@@ -120,7 +132,8 @@ localStorage.setItem("fitquestUser", JSON.stringify(demoUser));
           </p>
 
           <div className="mt-6 rounded-2xl border border-white/10 bg-slate-950/60 p-4 text-sm text-slate-400">
-            Demo: enter any valid email and any password.
+            Demo user: enter any valid email and password. Admin demo:
+            admin@fitquest.com or mireya@test.com.
           </div>
         </div>
       </main>

@@ -1,26 +1,8 @@
 import AdminNav from "../../components/AdminNav";
+import { getAdminLogs } from "../../services/adminService";
 
 export default function AdminLogs() {
-  const logs = [
-    {
-      id: 1,
-      action: "USER_REGISTERED",
-      user: "antonia@test.com",
-      date: "2026-05-18",
-    },
-    {
-      id: 2,
-      action: "AI_PLAN_GENERATED",
-      user: "mireya@test.com",
-      date: "2026-05-18",
-    },
-    {
-      id: 3,
-      action: "PROGRESS_UPDATED",
-      user: "user@test.com",
-      date: "2026-05-18",
-    },
-  ];
+  const logs = getAdminLogs();
 
   return (
     <main className="min-h-screen bg-slate-950 px-6 py-10 text-white">
