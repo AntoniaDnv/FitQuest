@@ -1,17 +1,16 @@
 import AdminNav from "../../components/AdminNav";
+import { getAdminStats, getAdminLogs } from "../../services/adminService";
 
 export default function AdminDashboard() {
-  const stats = [
-    { label: "Total Users", value: 24 },
-    { label: "Active Challenges", value: 8 },
-    { label: "Workouts Logged", value: 132 },
-    { label: "AI Plans Generated", value: 19 },
-  ];
+  const stats = getAdminStats();
+  const recentLogs = getAdminLogs().slice(0, 3);
 
-  const recentLogs = [
-    "USER_REGISTERED - antonia@test.com",
-    "AI_PLAN_GENERATED - mireya@test.com",
-    "PROGRESS_UPDATED - stefan@test.com",
+  const demoFeatures = [
+    "Role-based admin route protection",
+    "User moderation with local UI state",
+    "Challenge moderation with local UI state",
+    "AI output validation simulation",
+    "System log monitoring",
   ];
 
   return (
@@ -34,7 +33,7 @@ export default function AdminDashboard() {
         {stats.map((stat) => (
           <article
             key={stat.label}
-            className="rounded-3xl border border-white/10 bg-white/[0.04] p-6"
+            className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-xl"
           >
             <p className="text-sm text-slate-400">{stat.label}</p>
             <h2 className="mt-3 text-4xl font-bold">{stat.value}</h2>
@@ -42,18 +41,41 @@ export default function AdminDashboard() {
         ))}
       </section>
 
-      <section className="mt-8 rounded-3xl border border-white/10 bg-white/[0.04] p-6">
-        <h2 className="text-2xl font-semibold">Recent activity</h2>
+      <section className="mt-8 grid gap-5 lg:grid-cols-[1fr_0.8fr]">
+        <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-xl">
+          <h2 className="text-2xl font-semibold">Recent Activity</h2>
 
-        <div className="mt-5 space-y-3">
-          {recentLogs.map((log) => (
-            <div
-              key={log}
-              className="rounded-2xl border border-white/10 bg-slate-950/60 p-4 text-slate-300"
-            >
-              {log}
-            </div>
-          ))}
+          <div className="mt-5 space-y-3">
+            {recentLogs.map((log) => (
+              <div
+                key={log.id}
+                className="rounded-2xl border border-white/10 bg-slate-950/60 p-4"
+              >
+                <p className="font-semibold text-cyan-300">{log.action}</p>
+                <p className="text-slate-300">User: {log.user}</p>
+                <p className="text-slate-500">Date: {log.date}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-xl">
+          <h2 className="text-2xl font-semibold">Admin Demo Features</h2>
+          <p className="mt-3 text-slate-400">
+            These features simulate the final admin workflow before backend
+            integration.
+          </p>
+
+          <ul className="mt-5 space-y-3">
+            {demoFeatures.map((feature) => (
+              <li
+                key={feature}
+                className="rounded-2xl border border-white/10 bg-slate-950/60 p-4 text-slate-300"
+              >
+                ✓ {feature}
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
     </main>
