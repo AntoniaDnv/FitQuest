@@ -130,6 +130,10 @@ const reviewAiOutput = asyncHandler(async (req, res) => {
   if (isFlagged !== undefined) plan.isFlagged = Boolean(isFlagged);
   await plan.save();
 
+  // Re-populate the maker so the response keeps their name (frontend reads
+  // userId.username); without this the validated row would show "unknown".
+  await plan.populate('userId', 'username email');
+
   await createLog({
     userId: req.user._id,
     action: 'CONTENT_MODERATED',
